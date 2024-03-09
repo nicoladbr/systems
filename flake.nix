@@ -1,16 +1,19 @@
 {
   description = "Systems";
   inputs = {
-    darwin.inputs.nixpkgs.follows = "nixpkgs";
     darwin.url = "github:lnl7/nix-darwin";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixvim.url  = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ { flake-parts, self, ... }:
     let
       darwin        = import ./modules/darwin { inherit user; };
+      nixos         = import ./modules/nixos  { inherit user; };
       home-manager  = import ./modules/home-manager  { inherit inputs; };
 
       user = {
@@ -20,11 +23,12 @@
       };
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "aarch64-darwin"];
+      systems = [ "aarch64-darwin" "aarch64-linux" ];
 
       flake = {
         darwinConfigurations.rigel = inputs.darwin.lib.darwinSystem {
-        modules = [
+          system = "aarch64-darwin";
+          modules = [
             darwin
             inputs.home-manager.darwinModules.home-manager {
               home-manager.useGlobalPkgs = true;
@@ -34,12 +38,29 @@
               };
             }
           ];
-          system = "aarch64-darwin";
+        };
+
+       nixosConfigurations.proxima = inputs.nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            nixos
+            inputs.home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${user.username} = { pkgs, ... }: {
+                imports = [
+		  home-manager
+		  inputs.nixvim.homeManagerModules.nixvim
+                ];
+              };
+            }
+          ];
         };
       };
 
       perSystem = { system, pkgs, lib, ... }: {
-        packages.rigel = self.darwinConfigurations.rigel.system;
+        packages.rigel   = self.darwinConfigurations.rigel.system;
+        packages.proxima = self.nixosConfigurations.proxima.system;
       };
     };
 }
