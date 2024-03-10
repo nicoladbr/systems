@@ -29,17 +29,25 @@ in
     enable = true;
     casks  = [
       "1password"
-      "google-chrome"
+      "arc"
+      "intellij-idea"
       "istat-menus"
       "monodraw"
+      "notion"
       "obsidian"
       "orbstack"
       "raycast"
-      #"rectangle"
+      "rectangle"
+      "rustrover"
       "spotify"
       "vmware-fusion"
       "whatsapp"
     ];
+  };
+
+  system.defaults.dock = { 
+    autohide = true;
+    show-recents = false;
   };
 
   security.pam.enableSudoTouchIdAuth = true;
