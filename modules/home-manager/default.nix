@@ -91,6 +91,39 @@
     enableZshIntegration = true;
     settings = {
       add_newline = false;
+      aws = {
+        symbol = "aws ";
+      };
+      azure = {
+        symbol = "az ";
+      };
+      docker_context = {
+        symbol = "docker ";
+      };
+      golang = {
+        symbol = "go ";
+      };
+      java = {
+        symbol = "java ";
+      };
+      nodejs = {
+        symbol = "node ";
+      };
+      nix_shell = {
+        symbol = "nix ";
+      };
+      package = {
+        symbol = "pkg ";
+      };
+      rust = {
+        symbol = "rs ";
+      };
+      scala = {
+        symbol = "scala ";
+      };
+      terraform = {
+        symbol = "terraform ";
+      };
     };
   };
 
