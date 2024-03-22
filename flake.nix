@@ -12,9 +12,9 @@
 
   outputs = inputs @ { flake-parts, self, ... }:
     let
-      darwin        = import ./modules/darwin { inherit user; };
-      nixos         = import ./modules/nixos  { inherit user; };
-      home-manager  = import ./modules/home-manager  { inherit inputs; };
+      darwin = import ./modules/darwin { inherit user; };
+      nixos  = import ./modules/nixos  { inherit user; };
+      home   = import ./modules/home   { inherit inputs; };
 
       user = {
         username = "nicola";
@@ -34,7 +34,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${user.username} = { pkgs, ... }: {
-                imports = [ home-manager ];
+                imports = [ home ];
               };
             }
           ];
@@ -49,8 +49,8 @@
               home-manager.useUserPackages = true;
               home-manager.users.${user.username} = { pkgs, ... }: {
                 imports = [
-		  home-manager
-		  inputs.nixvim.homeManagerModules.nixvim
+                  home
+                  inputs.nixvim.homeManagerModules.nixvim
                 ];
               };
             }

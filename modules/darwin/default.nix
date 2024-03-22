@@ -16,7 +16,7 @@ in
     systemPath = [ "/opt/homebrew/bin" ];
     pathsToLink = [ "/Applications" ];
   };
-  
+
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
@@ -24,28 +24,33 @@ in
       mplus-outline-fonts.githubRelease
     ];
   };
-  
+
   homebrew = {
     enable = true;
+    global = {
+      autoUpdate = true;
+      brewfile = true;
+      lockfiles = true;
+    };
     casks  = [
       "1password"
-      "arc"
+      "firefox"
       "intellij-idea"
-      "istat-menus"
       "monodraw"
+      "mullvadvpn"
       "notion"
-      "obsidian"
       "orbstack"
       "raycast"
       "rectangle"
       "rustrover"
-      "spotify"
+      "signal"
       "vmware-fusion"
       "whatsapp"
+      "zed"
     ];
   };
 
-  system.defaults.dock = { 
+  system.defaults.dock = {
     autohide = true;
     show-recents = false;
   };

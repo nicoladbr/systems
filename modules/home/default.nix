@@ -76,6 +76,19 @@
     };
   };
 
+  programs.wezterm = {
+    enable = true;
+
+    extraConfig = ''
+      return {
+        color_scheme = "Ayu Mirage",
+        font = wezterm.font("PragmataPro Mono Liga"),
+        font_size = 14.0,
+        hide_tab_bar_if_only_one_tab = true,
+      }
+    '';
+  };
+
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -106,6 +119,9 @@
       java = {
         symbol = "java ";
       };
+      lua = {
+        symbol = "lua ";
+      };
       nodejs = {
         symbol = "node ";
       };
@@ -130,7 +146,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion.enable = true;
     history = {
       expireDuplicatesFirst = true;
     };
