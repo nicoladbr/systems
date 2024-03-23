@@ -28,9 +28,12 @@ in
   homebrew = {
     enable = true;
     global = {
-      autoUpdate = true;
       brewfile = true;
       lockfiles = true;
+    };
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap";
     };
     casks  = [
       "1password"
@@ -39,6 +42,7 @@ in
       "monodraw"
       "mullvadvpn"
       "notion"
+      "openemu"
       "orbstack"
       "raycast"
       "rectangle"
