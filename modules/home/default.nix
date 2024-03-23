@@ -36,6 +36,11 @@
     sbt
   ];
 
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
+
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -45,43 +50,52 @@
           family = "PragmataPro Mono Liga";
         };
       };
-      colors = {
-        primary = {
-          background = "#0C1113";
-          foreground = "#ebdbb2";
-        };
-        normal = {
-          black   = "#282828";
-          red     = "#cc241d";
-          green   = "#98971a";
-          yellow  = "#d79921";
-          blue    = "#458588";
-          magenta = "#b16286";
-          cyan    = "#689d6a";
-          white   = "#a89984";
-        };
-        bright = {
-          black   = "#928374";
-          red     = "#fb4934";
-          green   = "#b8bb26";
-          yellow  = "#fabd2f";
-          blue    = "#83a598";
-          magenta = "#d3869b";
-          cyan    = "#8ec07c";
-          white   = "#ebdbb2";
-        };
-      };
+
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+
+      colors = {
+        primary = {
+          background = "0x16171E";
+          foreground = "0xD1D2D3";
+        };
+
+        cursor = {
+          text = "0xFEFFFF";
+          cursor = "0xc7c7c7";
+        };
+
+        normal = {
+          black = "0x000000";
+          red = "0xE68E8E";
+          green = "0x83AC8E";
+          yellow ="0xF5B78A";
+          blue = "0x9BB8DC";
+          magenta = "0xBAACe2";
+          cyan = "0x89B8C2";
+          white = "0xC7C7C7";
+        };
+
+        bright = {
+          black = "0x676767";
+          red = "0xFF6D67";
+          green = "0x5FF967";
+          yellow = "0xFEFB67";
+          blue = "0x6871FF";
+          magenta = "0xFF76FF";
+          cyan = "0x95C4CE";
+          white = "0xFEFFFF";
+        };
+      };
     };
   };
 
   programs.wezterm = {
     enable = true;
 
-    extraConfig = ''
+    extraConfig = '' 
       return {
-        color_scheme = "Ayu Mirage",
+        color_scheme = "iceberg-dark",
         font = wezterm.font("PragmataPro Mono Liga"),
         font_size = 14.0,
         hide_tab_bar_if_only_one_tab = true,
@@ -110,6 +124,9 @@
       azure = {
         symbol = "az ";
       };
+      cmd_duration = {
+        style = "bold cyan";
+      };
       docker_context = {
         symbol = "docker ";
       };
@@ -129,6 +146,7 @@
         symbol = "nix ";
       };
       package = {
+        disabled = true;
         symbol = "pkg ";
       };
       rust = {
@@ -155,9 +173,6 @@
       eza = "eza -al";
       k = "kubectl";
       ll = "eza";
-    };
-    localVariables = {
-      RPROMPT = "";
     };
   };
 

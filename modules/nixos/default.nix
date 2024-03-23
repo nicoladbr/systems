@@ -15,7 +15,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "proxima"; 
+  networking.hostName = "proxima";
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Rome";
@@ -30,21 +30,21 @@ in
       xkbVariant = "";
 
       displayManager = {
-	defaultSession = "none+i3";
-	lightdm.enable = true;
-	sessionCommands = '' 
-	  ${pkgs.xorg.xset}/bin/xset r rate 200 40
-	'';
+        defaultSession = "none+i3";
+        lightdm.enable = true;
+        sessionCommands = ''
+            ${pkgs.xorg.xset}/bin/xset r rate 200 40
+        '';
       };
 
       windowManager.i3 = {
-	enable = true;
-	package = pkgs.i3-gaps;
-	extraPackages = with pkgs; [
-	  i3status 
-	  i3lock 
-   	  i3blocks
-	];
+    	enable = true;
+    	package = pkgs.i3-gaps;
+    	extraPackages = with pkgs; [
+    	  i3status
+    	  i3lock
+     	  i3blocks
+    	];
       };
     };
   };
